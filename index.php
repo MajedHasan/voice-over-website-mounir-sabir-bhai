@@ -14,6 +14,12 @@
     include("./includes/common/header.php");
 
     // include("./includes/common/categoryMenu.php");
+
+    $query = "SELECT * FROM meta WHERE meta_type = 'category' ";
+    $categories = $conn->query($query);
+    $query = "SELECT * FROM meta WHERE meta_type = 'language' ";
+    $languages = $conn->query($query);
+
 ?>
 
 
@@ -51,18 +57,27 @@
             <div class="flex md:flex-row flex-col gap-x-10 gap-y-2 items-center border-y-2 py-2">
                 <p class="font-semibold italic text-lg">Filter</p>
                 <form action="" class="flex-1 flex sm:flex-row flex-col gap-x-10 gap-y-2 items-center" id="filter-form">
-                    <select name="category" id="" class="py-1 px-7 text-lg font-light rounded border border-violet-600 outline-none">
-                        <option value="" selected disabled>Language</option>
-                        <option value="Arabic">Arabic</option>
-                        <option value="Franch">Franch</option>
-                        <option value="Urdu">Urdu</option>
-                    </select>
                     <select name="language" id="" class="py-1 px-7 text-lg font-light rounded border border-violet-600 outline-none">
+                        <option value="" selected disabled>Language</option>
+                        <option value="All">All</option>
+                        <?php 
+                            while($row = $languages->fetch_assoc()){
+                                ?>
+                                <option value="<?=$row['meta_name']?>"><?=$row['meta_name']?></option>
+                                <?php
+                            }
+                        ?>
+                    </select>
+                    <select name="category" id="" class="py-1 px-7 text-lg font-light rounded border border-violet-600 outline-none">
                         <option value="" selected disabled>Category</option>
-                        <option value="Radio">Radio</option>
-                        <option value="Social Media">Social Media</option>
-                        <option value="Ebook">Ebook</option>
-                        <option value="TV">TV</option>
+                        <option value="All">All</option>
+                        <?php 
+                            while($row = $categories->fetch_assoc()){
+                                ?>
+                                <option value="<?=$row['meta_name']?>"><?=$row['meta_name']?></option>
+                                <?php
+                            }
+                        ?>
                     </select>
                     <button class="bg-[#711b76] py-1 px-7 rounded text-slate-50" type="submit">SUBMIT</button>
                 </form>

@@ -11,20 +11,34 @@
 ?>
 
 
-    <!-- ================================ Banner ================================ -->
-    <!-- ============================##== Banner ==##============================ -->
+    <main class="flex w-full min-h-screen h-full">
+        <!-- ================================ Banner ================================ -->
+        <?php 
+            include("./includes/common/dashboardSidebar.php");
+        ?>
+        <!-- ============================##== Banner ==##============================ -->
 
-
-    <!-- ================================ Demo ================================ -->
-    <section id="demo" class="py-20">
-        <div class="container mx-auto lg:px-0 px-2 xl:max-w-[1240px] overflow-hidden">
+        <!-- ================================ Banner ================================ -->
+        <div class="flex flex-1 flex-col p-3">
+            <h1 class="text-center my-6 text-3xl italic font-semibold">Dashboard</h1>
+            <div class="flex-1 flex items-center justify-center h-full">
+                <div class="grid md:grid-cols-2 grid-cols-1 gap-10">
+                    <div class="shadow-lg rounded py-4 px-6 bg-violet-200 md:w-72 w-full">
+                        <h2 class="text-2xl font-semibold">Total Orders</h2>
+                        <h1 class="text-7xl font-bold my-5">10</h1>
+                        <a href="./orders.php" class="py-1 px-3 rounded bg-violet-700 text-slate-50 italic hover:bg-violet-500 transition-all">See All Orders</a>
+                    </div>
+                    <div class="shadow-lg rounded py-4 px-6 bg-teal-200 md:w-72 w-full">
+                        <h2 class="text-2xl font-semibold">Total Services</h2>
+                        <h1 class="text-7xl font-bold my-5">2</h1>
+                        <a href="./services.php" class="py-1 px-3 rounded bg-teal-700 text-slate-50 italic hover:bg-teal-500 transition-all">See All Services</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-    <!-- ============================##== Demo ==##============================ -->
+        <!-- ============================##== Banner ==##============================ -->
 
-
-    <!-- ================================ Header ================================ -->
-    <!-- ============================##== Header ==##============================ -->
+    </main>
 
 
 <?php include("./includes/common/footer.php") ?>

@@ -119,10 +119,13 @@
                     });
 
                     // Initialize Swiper
-                    var mySwiper = new Swiper('.banner-slider', {
+                    var bannerSwiper = new Swiper('.banner-slider', {
                         // Default configuration for larger screens
                         slidesPerView: 1,
                         spaceBetween: 30,
+                        autoplay: {
+                            duration: 1000
+                        },
                         navigation: {
                             nextEl: '.banner-slider-button-next',
                             prevEl: '.banner-slider-button-prev',
@@ -131,10 +134,11 @@
                             el: '.swiper-pagination',
                             clickable: true, // Enables clickable pagination bullets
                         },
+                        slidesPerGroup: 1,
                     });
 
                     // Initialize Swiper
-                    var mySwiper = new Swiper('.trust-us-slider', {
+                    var trustUsSwiper = new Swiper('.trust-us-slider', {
                         // Default configuration for larger screens
                         slidesPerView: 1,
                         spaceBetween: 8,

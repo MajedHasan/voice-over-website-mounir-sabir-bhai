@@ -82,6 +82,8 @@
                                 </div>
                                 <div class="absolute top-10 right-0 rounded shadow-xl bg-violet-50 py-2 px-5 w-52 flex flex-col gap-4 invisible group-hover:visible">
                                     <a href="./dashboard.php" class="border-b pb-2 hover:text-slate-400">Dashboard</a>
+                                    <a href="./services.php" class="border-b pb-2 hover:text-slate-400">Services</a>
+                                    <a href="./orders.php" class="border-b pb-2 hover:text-slate-400">Orders</a>
                                     <a href="./logout.php" class="px-3 py-1 rounded bg-red-600 text-slate-50 w-full">Log Out</a>
                                 </div>
                             </div>
@@ -116,8 +118,24 @@
                         <a href="/blog.php" class="text-md hover:text-[#df98e8] <?= $currentPage == 'Blog' ? 'font-semibold text-[#711b76]' : '' ?>">Blog</a>
                         <a href="/contact.php" class="text-md hover:text-[#df98e8] <?= $currentPage == 'Contact' ? 'font-semibold text-[#711b76]' : '' ?>">Contact</a>
                     </div>
-                    <a href="./login.php" class="border border-[#711b76] py-1 px-4 rounded text-[#711b76] font-semibold hover:bg-[#711b76] hover:text-white transition-all text-center">Log In</a>
-                    <a href="./signup.php" class="bg-[#711b76] rounded py-1 px-4 text-white text-md font-semibold border-[#711b76] border hover:bg-gray-50 hover:text-[#711b76] transition-all text-center">Sign Up</a>
+                    <?php 
+                        if(!empty($loggedInUser)){
+                            ?>
+                                <div class="flex rounded shadow-xl bg-violet-50 py-2 px-5 w-full flex flex-col gap-4">
+                                    <a href="./dashboard.php" class="border-b pb-2 hover:text-slate-400">Dashboard</a>
+                                    <a href="./services.php" class="border-b pb-2 hover:text-slate-400">Services</a>
+                                    <a href="./orders.php" class="border-b pb-2 hover:text-slate-400">Orders</a>
+                                    <a href="./logout.php" class="px-3 py-1 rounded bg-red-600 text-slate-50 w-full">Log Out</a>
+                                </div>
+                            <?php
+                        }
+                        else{
+                            ?>
+                                <a href="./login.php" class="border border-[#711b76] py-1 px-4 rounded text-[#711b76] font-semibold hover:bg-[#711b76] hover:text-white transition-all text-center">Log In</a>
+                                <a href="./signup.php" class="bg-[#711b76] rounded py-1 px-4 text-white text-md font-semibold border-[#711b76] border hover:bg-gray-50 hover:text-[#711b76] transition-all text-center">Sign Up</a>
+                            <?php
+                        }
+                    ?>
                 </div>
             </div>
         </div>

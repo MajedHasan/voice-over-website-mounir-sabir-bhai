@@ -7,10 +7,10 @@
                     <script src="./assets/js/offer-page.js"></script>
     ';
 
-    $category_id = null;
-    $page = null;
-    if(isset($_GET['category_id'])){
-        $category_id = $_GET['category_id'];
+    $category = null;
+    $page = 1;
+    if(isset($_GET['category'])){
+        $category = urldecode($_GET['category']);
     }
     if(isset($_GET['page'])){
         $page = $_GET['page'];
@@ -27,15 +27,17 @@
     <section id="offer" class="my-10">
         <div class="container mx-auto lg:px-0 px-2 xl:max-w-[1240px] overflow-hidden ">
             <h1 class="text-center italic font-bold xl:text-4xl text-2xl"><span class="text-[#df98e8]">O</span>ffer</h1>
+            <input type="hidden" id="category" value="<?= $category ?>">
+            <input type="hidden" id="page" value="<?= $page ?>">
             <div id="offer-container" class="flex flex-col gap-8 py-10">
 
             </div>
-            <div class="md:max-w-[449px] max-w-full mx-auto rounded py-2 px-5 flex items-center gap-1 justify-between border-y-2 border-y-[#df98e8]">
-                <a href="./offer.php?category_id=<?= $category_id ?>&page=<?= $page > 1 ? $page-1 : 1;?>" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">Prev</a>
-                <a href="./offer.php?category_id=<?= $category_id ?>&page=1" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">1</a>
-                <a href="./offer.php?category_id=<?= $category_id ?>&page=2" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">2</a>
-                <a href="./offer.php?category_id=<?= $category_id ?>&page=3" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">3</a>
-                <a href="./offer.php?category_id=<?= $category_id ?>&page=<?= $page < 10 ? $page+1 : 10;?>" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">Next</a>
+            <div class="md:max-w-[449px] max-w-full mx-auto rounded py-2 px-5 flex items-center gap-1 justify-between border-y-2 border-y-[#df98e8]" id="pagination">
+                <!-- <a href="./offer.php?category=<?= $category ?>&page=<?= $page > 1 ? $page-1 : 1;?>" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">Prev</a>
+                <a href="./offer.php?category=<?= $category ?>&page=1" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">1</a>
+                <a href="./offer.php?category=<?= $category ?>&page=2" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">2</a>
+                <a href="./offer.php?category=<?= $category ?>&page=3" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">3</a>
+                <a href="./offer.php?category=<?= $category ?>&page=<?= $page < 10 ? $page+1 : 10;?>" class="rounded-full w-8 h-8 bg-[#711b76] text-xs flex items-center justify-center text-slate-50">Next</a> -->
             </div>
             <div class="lg:max-w-[700px] max-w-full mx-auto my-6">
                 <p class="text-md italic text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus suscipit quae quam perferendis asperiores delectus consectetur modi odio recusandae, ducimus eos omnis expedita quo possimus eum repellendus! Inventore, atque dolores recusandae illum aut ut molestias!</p>

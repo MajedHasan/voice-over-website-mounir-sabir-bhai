@@ -28,7 +28,7 @@ function displayUserInfo(responseData) {
       responseData?.map(
         (category) =>
           (htmlContent += `
-            <a href="/offer.php?category_id=${category.id}" class="border-[7px] rounded-lg shadow-xl py-4 px-6">
+            <a href="/offer.php?category=${category.meta_name}" class="border-[7px] rounded-lg shadow-xl py-4 px-6">
                 <img src="${category.media_url}" alt="${category.meta_name}" class="rounded-t" />
                 <p class="text-center py-2 px-3 bg-slate-200 rounded-b font-semibold">${category.meta_name}</p>
             </a>
