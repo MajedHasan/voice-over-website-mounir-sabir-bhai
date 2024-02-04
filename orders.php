@@ -7,6 +7,13 @@
 
     include("./includes/common/header.php");
 
+    $uid = $loggedInUser['id'];
+    $query = "SELECT o.*, s.name as service_name
+          FROM orders o
+          LEFT JOIN services s ON o.service_id = s.id
+          WHERE o.uid = '$uid' ";
+    $result = $conn->query($query);
+
 ?>
 
 
@@ -39,83 +46,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th> 
-                                    <td>Voice For Muslim Ummah</td>
-                                    <td>Majed Hasan</td> 
-                                    <td>mdmajedhasan599@gmail.com</td> 
-                                    <td>01811852248</td> 
-                                    <td>My Message for you to get a voice for muslim ummah</td> 
-                                    <td>Card</td> 
-                                    <td>$<span class="text-yellow-600 font-semibold text-xl">150</span>dh</td>
-                                    <th class="text-teal-600">Paid</th> 
-                                </tr>
-                                <tr>
-                                    <th>1</th> 
-                                    <td>Voice For Muslim Ummah</td>
-                                    <td>Majed Hasan</td> 
-                                    <td>mdmajedhasan599@gmail.com</td> 
-                                    <td>01811852248</td> 
-                                    <td>My Message for you to get a voice for muslim ummah</td> 
-                                    <td>Card</td> 
-                                    <td>$<span class="text-yellow-600 font-semibold text-xl">150</span>dh</td>
-                                    <th class="text-teal-600">Paid</th> 
-                                </tr>
-                                <tr>
-                                    <th>1</th> 
-                                    <td>Voice For Muslim Ummah</td>
-                                    <td>Majed Hasan</td> 
-                                    <td>mdmajedhasan599@gmail.com</td> 
-                                    <td>01811852248</td> 
-                                    <td>My Message for you to get a voice for muslim ummah</td> 
-                                    <td>Card</td> 
-                                    <td>$<span class="text-yellow-600 font-semibold text-xl">150</span>dh</td>
-                                    <th class="text-teal-600">Paid</th> 
-                                </tr>
-                                <tr>
-                                    <th>1</th> 
-                                    <td>Voice For Muslim Ummah</td>
-                                    <td>Majed Hasan</td> 
-                                    <td>mdmajedhasan599@gmail.com</td> 
-                                    <td>01811852248</td> 
-                                    <td>My Message for you to get a voice for muslim ummah</td> 
-                                    <td>Card</td> 
-                                    <td>$<span class="text-yellow-600 font-semibold text-xl">150</span>dh</td>
-                                    <th class="text-teal-600">Paid</th> 
-                                </tr>
-                                <tr>
-                                    <th>1</th> 
-                                    <td>Voice For Muslim Ummah</td>
-                                    <td>Majed Hasan</td> 
-                                    <td>mdmajedhasan599@gmail.com</td> 
-                                    <td>01811852248</td> 
-                                    <td>My Message for you to get a voice for muslim ummah</td> 
-                                    <td>Card</td> 
-                                    <td>$<span class="text-yellow-600 font-semibold text-xl">150</span>dh</td>
-                                    <th class="text-teal-600">Paid</th> 
-                                </tr>
-                                <tr>
-                                    <th>1</th> 
-                                    <td>Voice For Muslim Ummah</td>
-                                    <td>Majed Hasan</td> 
-                                    <td>mdmajedhasan599@gmail.com</td> 
-                                    <td>01811852248</td> 
-                                    <td>My Message for you to get a voice for muslim ummah</td> 
-                                    <td>Card</td> 
-                                    <td>$<span class="text-yellow-600 font-semibold text-xl">150</span>dh</td>
-                                    <th class="text-teal-600">Paid</th> 
-                                </tr>
-                                <tr>
-                                    <th>1</th> 
-                                    <td>Voice For Muslim Ummah</td>
-                                    <td>Majed Hasan</td> 
-                                    <td>mdmajedhasan599@gmail.com</td> 
-                                    <td>01811852248</td> 
-                                    <td>My Message for you to get a voice for muslim ummah</td> 
-                                    <td>Card</td> 
-                                    <td>$<span class="text-yellow-600 font-semibold text-xl">150</span>dh</td>
-                                    <th class="text-teal-600">Paid</th> 
-                                </tr>
+                                <?php 
+                                    if($result->num_rows > 0){
+                                        while ($row = $result->fetch_assoc()) {
+                                            ?>
+                                            <tr>
+                                                <th><?= $row['id'] ?></th> 
+                                                <td><?= $row['service_name'] ?></td>
+                                                <td><?= $row['name'] ?></td> 
+                                                <td><?= $row['email'] ?></td> 
+                                                <td><?= $row['whats_app'] ?></td> 
+                                                <td><?= $row['message'] ?></td> 
+                                                <td><?= $row['payment_type'] ?></td> 
+                                                <td>$<span class="text-yellow-600 font-semibold text-xl"><?= $row['price'] ?></span>dh</td>
+                                                <th class="text-teal-600"><?= $row['status'] ?></th> 
+                                            </tr>
+                                            <?php
+                                        }
+                                    }
+                                    else{
+                                        ?>
+                                            <tr>
+                                                <td colspan="9"><p class="text-center text-xl font-bold text-red-500">No Order Found!</p></td>
+                                            </tr>
+                                        <?php
+                                    }
+                                ?>
                             </tbody>
                             <tfoot>
                                 <tr>

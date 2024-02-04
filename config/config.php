@@ -1,12 +1,24 @@
 <?php 
+
     require("./config/db.php");
+
+    session_start();
 
     $server = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
+    // Use the null coalescing operator to simplify the check
+    $loggedInUser = $_SESSION['loggedInUser'] ?? null;
 
-    $query = "SELECT * FROM users WHERE id = '1' ";
-    $result = $conn->query($query);
+    if (isset($_GET['loggedInUser'])) {
+        // Decode the URL parameter and parse the JSON string
+        $loggedInUserData = json_decode(urldecode($_GET['loggedInUser']), true);
 
-    $loggedInUser = $result->fetch_assoc();
-    
+        // Store data in session or perform other actions
+        $_SESSION['loggedInUser'] = $loggedInUserData;
+
+        // Redirect to the root URL
+        header("Location: /");
+        exit; // Ensure script stops here
+    }
+
 ?>
