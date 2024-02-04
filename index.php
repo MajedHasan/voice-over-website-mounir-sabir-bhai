@@ -83,7 +83,7 @@
                 </form>
             </div>
             <div class="flex flex-col gap-10 pt-8" id="filter-results">
-                <div class="rounded lg:py-6 py-2 lg:px-10 px-5 shadow-lg bg-violet-100 flex items-center justify-between gap-7">
+                <!-- <div class="rounded lg:py-6 py-2 lg:px-10 px-5 shadow-lg bg-violet-100 flex items-center justify-between gap-7">
                     <div class="flex flex-col items-center">
                         <img src="./assets/img/dummy-profile-pic.jpeg" alt="" class="border-4 rounded-full max-w-24 w-full">
                         <p class="text-xl font-bold text-slate-500">Name</p>
@@ -109,7 +109,7 @@
                     <div>
                         <a href="./checkout.php?service_id=1" class="py-2 px-8 rounded text-slate-50 bg-[#711b76] text-lg">Choose Me</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } else {
         // Debugging statement
-        echo json_encode(array('error' => 'User not found or SQL query error: ' . $conn->error));
+        echo json_encode(array('error' => 'Services not found or SQL query error: ' . $conn->error));
         exit;
     }
 }
