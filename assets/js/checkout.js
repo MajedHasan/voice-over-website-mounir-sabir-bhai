@@ -37,8 +37,8 @@ function showContent(paymentType) {
     paymentContentInner = `
         <div class="grid lg:grid-cols-2 grid-cols-1 gap-3">
             <div class="flex flex-col gap-1">
-                <label class="text-sm">Card Name</label>
-                <input type="text" name="card_name" class="w-full py-2 pl-2 rounded"/>
+                <label class="text-sm">Card Holder Name</label>
+                <input type="text" name="card_holder_name" class="w-full py-2 pl-2 rounded"/>
             </div>
             <div class="flex flex-col gap-1">
                 <label class="text-sm">Card Number</label>
@@ -47,6 +47,10 @@ function showContent(paymentType) {
             <div class="flex flex-col gap-1">
                 <label class="text-sm">CVC</label>
                 <input type="number" name="card_cvc" class="w-full py-2 pl-2 rounded"/>
+            </div>
+            <div class="flex flex-col gap-1">
+                <label class="text-sm">Expiration Data</label>
+                <input type="date" name="cardExpirationData" class="w-full py-2 pl-2 rounded"/>
             </div>
         </div>
       `;
@@ -178,12 +182,19 @@ function checkout(e) {
       submitOrder({ ...values, cod_content });
     }
   } else if (payment_type === "Card") {
-    const card_name = validate(e.target.card_name);
+    const card_holder_name = validate(e.target.card_holder_name);
     const card_number = validate(e.target.card_number);
     const card_cvc = validate(e.target.card_cvc);
+    const cardExpirationData = validate(e.target.cardExpirationData);
 
     if (!hasError) {
-      submitOrder({ ...values, card_name, card_number, card_cvc });
+      submitOrder({
+        ...values,
+        card_holder_name,
+        card_number,
+        card_cvc,
+        cardExpirationData,
+      });
     }
   }
 }

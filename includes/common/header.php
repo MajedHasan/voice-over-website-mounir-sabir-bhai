@@ -1,5 +1,13 @@
 <?php 
     require("./config/config.php");
+
+    if($currentPage == "Add Service"){
+        if(empty($_SESSION['loggedInUser'])){
+            header("Location: /");
+            exit;
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>

@@ -11,6 +11,7 @@ document
 
 const categoriesInput = document.getElementById("categoriesInput");
 const languageInput = document.getElementById("languageInput");
+const voiceInput = document.getElementById("voiceInput");
 
 let categories = [
   { id: 1, name: "Audio" },
@@ -18,20 +19,26 @@ let categories = [
   { id: 3, name: "EBook" },
   { id: 4, name: "Social Media" },
 ];
+let selectedCategories = [];
+
 let languages = [
   { id: 1, name: "Arabic" },
   { id: 2, name: "Franch" },
 ];
+let selectedLangauges = [];
+
 let voices = [];
 
-window.addEventListener("load", function () {
+window.addEventListener("load", categoryAndLangaugeInputes);
+
+function categoryAndLangaugeInputes() {
   categoriesInput.innerHTML = `${categories.map(
     (category) => `<option value="${category.id}">${category.name}</option>`
   )}`;
   languageInput.innerHTML = `${languages.map(
     (language) => `<option value="${language.id}">${language.name}</option>`
   )}`;
-});
+}
 
 if (addServiceForm !== undefined) {
   addServiceForm.addEventListener("submit", function (e) {
@@ -39,22 +46,42 @@ if (addServiceForm !== undefined) {
 
     hasError = false; // Reset hasError for each form submission
 
+    const uid = validate(e.target.uid);
     const name = validate(e.target.name);
     const email = validate(e.target.email);
     const number = validate(e.target.number);
     const price = validate(e.target.price);
 
     const values = {
+      uid,
       name,
       email,
       number,
       price,
-      categories,
-      languages,
+      selectedCategories,
+      selectedLangauges,
       voices,
     };
 
     console.log(values);
+
+    if (!hasError) {
+      fetch("./ajax/users/addService.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the response from the server
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
   });
 }
 
@@ -87,6 +114,11 @@ function validate(field) {
 }
 
 function addCategory() {
+  if (!categories.length > 0) {
+    alert("You can't add more categories");
+    return null;
+  }
+
   const categoriesContainer = document.getElementById("categories");
   const newCategoryDiv = createInputElement("div", [
     "bg-slate-200",
@@ -99,7 +131,18 @@ function addCategory() {
     "shadow-lg",
   ]);
 
-  const span = createTextElement("span", "New Category");
+  const category = categories.find(
+    (category) => category.id == categoriesInput.value
+  );
+  selectedCategories.push(category);
+
+  const filteredCategories = categories.filter(
+    (category) => category.id != categoriesInput.value
+  );
+  categories = filteredCategories;
+  categoryAndLangaugeInputes();
+
+  const span = createTextElement("span", category.name);
 
   const closeButton = createButtonElement(
     "button",
@@ -117,6 +160,9 @@ function addCategory() {
     "X"
   );
   closeButton.addEventListener("click", function () {
+    const stCategory = selectedCategories.find((ct) => ct.id == category.id);
+    categories.push(stCategory);
+    categoryAndLangaugeInputes();
     categoriesContainer.removeChild(newCategoryDiv);
   });
 
@@ -125,6 +171,11 @@ function addCategory() {
 }
 
 function addLanguage() {
+  if (!languages.length > 0) {
+    alert("You can't add more languages");
+    return null;
+  }
+
   const languageContainer = document.getElementById("language");
   const newLanguageDiv = createInputElement("div", [
     "bg-slate-200",
@@ -138,9 +189,41 @@ function addLanguage() {
     "shadow-lg",
   ]);
 
-  const span = createTextElement("span", "New Language");
+  const language = languages.find(
+    (language) => language.id == languageInput.value
+  );
+  selectedLangauges.push(language);
 
-  const audio = createAudioElement("./assets/voices/demo/demo-1.mp3");
+  const filteredLanguages = languages.filter(
+    (language) => language.id != languageInput.value
+  );
+  languages = filteredLanguages;
+  categoryAndLangaugeInputes();
+
+  const span = createTextElement("span", language.name);
+
+  // Ensure that a file is selected
+  if (voiceInput.files.length > 0) {
+    const selectedFile = voiceInput.files[0];
+
+    // Get the file extension
+    const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
+
+    // Check if the file extension is valid (you can add more extensions if needed)
+    if (["mp3", "wav", "ogg"].includes(fileExtension)) {
+      // Create a URL for the uploaded file
+      const audioURL = URL.createObjectURL(selectedFile);
+
+      // Push the URL to the voices array
+      voices.push({ url: audioURL, extension: fileExtension });
+    } else {
+      alert("Invalid file format. Please upload a valid audio file.");
+    }
+  } else {
+    alert("Please select an audio file.");
+  }
+
+  const audio = createAudioElement(voices[0].url);
 
   const closeButton = createButtonElement(
     "button",
@@ -158,6 +241,12 @@ function addLanguage() {
     "X"
   );
   closeButton.addEventListener("click", function () {
+    const stLangauge = selectedLangauges.find((lg) => lg.id == language.id);
+    languages.push(stLangauge);
+    categoryAndLangaugeInputes();
+    const filterVoices = voices.filter((voice) => voiceInput.value != voice);
+    voices = filterVoices;
+    console.log(voices);
     languageContainer.removeChild(newLanguageDiv);
   });
 

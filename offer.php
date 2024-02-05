@@ -43,7 +43,7 @@
                 <p class="text-md italic text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus suscipit quae quam perferendis asperiores delectus consectetur modi odio recusandae, ducimus eos omnis expedita quo possimus eum repellendus! Inventore, atque dolores recusandae illum aut ut molestias!</p>
             </div>
             <div class="flex justify-center">
-                <a href="./add-service.php" class="rounded py-2 px-12 bg-[#711b76] text-slate-50 text-xl italic hover:bg-[#df98e8] transition-all hover:text-slate-900">Add a service</a>
+                <a href="./addservice.php" class="rounded py-2 px-12 bg-[#711b76] text-slate-50 text-xl italic hover:bg-[#df98e8] transition-all hover:text-slate-900">Add a service</a>
             </div>
         </div>
     </section>

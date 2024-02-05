@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content;
     $codContent = $data['cod_content'] ?? '';
     $cardNumber = $data['card_number'] ?? '';
-    $cardName = $data['card_name'] ?? '';
+    $card_holder_name = $data['card_holder_name'] ?? '';
+    $cardExpirationData = $data['cardExpirationData'] ?? '';
     $cardCVC = $data['card_cvc'] ?? '';
 
     // Perform actions based on payment_type
@@ -31,8 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $content = json_encode(['cod_content' => $codContent]);
     } elseif ($paymentType === 'Card') {
         // Process Card payment
-        // You can use $cardNumber, $cardName, $cardCVC here
-        $content = json_encode(['card_number' => $cardNumber, 'card_name' => $cardName, 'cardCVC' => $cardCVC]);
+        // You can use $cardNumber, $card_holder_name, $cardCVC here
+        $discountPercentage = 10;
+        $discountAmount = ($price * $discountPercentage) / 100;
+        $price = $price - $discountAmount;
+
+        $content = json_encode(['card_number' => $cardNumber, 'card_holder_name' => $card_holder_name, 'cardCVC' => $cardCVC, 'cardExpirationData' => $cardExpirationData]);
     } else {
         // Handle other payment types if needed
         $content = 'Unknown payment type';
