@@ -16,7 +16,7 @@
 
     $query = "SELECT * FROM services WHERE uid = '$uid' ";
     $services = $conn->query($query);
-    $totalServices = $orders->num_rows;
+    $totalServices = $services->num_rows;
 
 ?>
 

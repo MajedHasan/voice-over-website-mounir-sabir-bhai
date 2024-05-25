@@ -57,7 +57,7 @@
 
 
 </head>
-<body>
+<body class="bg-[#fcf3ff]">
 
     <!-- ================================ Header ================================ -->
     <header id="header" class="border-b border-b-sky-800 sticky top-0 bg-white z-[999]">

@@ -1,6 +1,6 @@
 
     <!-- ================================ Footer ================================ -->
-    <footer id="footer" class="bg-[#711b76] py-14 lg:px-0 px-4">
+    <!-- <footer id="footer" class="bg-[#711b76] py-14 lg:px-0 px-4">
         <div class="flex md:flex-row flex-col gap-10 container mx-auto xl:max-w-[1240px] mb-6">
             <div class="flex-1">
                 <a href="/" class="text-4xl text-white font-bold italic mb-8 block">Voices</a>
@@ -31,7 +31,7 @@
             <p class="text-white text-sm">Copyright &copy; <script>document.write(new Date().getFullYear())</script> Voices.com Inc</p>
             <p class="text-white text-sm">Developed By <a href="https://madconsolution.com" target="_blank" class="font-bold italic text-teal-400">madconsolution</a></p>
         </div>
-    </footer>
+    </footer> -->
     <!-- ============================##== Footer ==##============================ -->
 
 
